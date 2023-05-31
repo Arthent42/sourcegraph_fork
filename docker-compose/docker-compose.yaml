@@ -167,6 +167,7 @@ services:
       start_period: 300s
     volumes:
       - 'sourcegraph-frontend-0:/mnt/cache'
+      - './site-config.json:/home/sourcegraph/site-config.json'
     networks:
       - sourcegraph
     restart: always
