@@ -133,6 +133,7 @@ services:
       - PGHOST=pgsql
       - CODEINTEL_PGHOST=codeintel-db
       - CODEINSIGHTS_PGDATASOURCE=postgres://postgres:password@codeinsights-db:5432/postgres
+      - SITE_CONFIG_FILE=site.json
       - 'SRC_GIT_SERVERS=gitserver-0:3178'
       - 'SRC_SYNTECT_SERVER=http://syntect-server:9238'
       - 'SEARCHER_URL=http://searcher-0:3181'
@@ -167,7 +168,7 @@ services:
       start_period: 300s
     volumes:
       - 'sourcegraph-frontend-0:/mnt/cache'
-      - './site-config.json:/home/sourcegraph/site-config.json'
+      - './site.json:/site.json'
     networks:
       - sourcegraph
     restart: always
@@ -191,6 +192,7 @@ services:
       - PGHOST=pgsql
       - CODEINTEL_PGHOST=codeintel-db
       - CODEINSIGHTS_PGDATASOURCE=postgres://postgres:password@codeinsights-db:5432/postgres
+      - SITE_CONFIG_FILE=site.json
       - 'SRC_GIT_SERVERS=gitserver-0:3178'
       - 'SRC_SYNTECT_SERVER=http://syntect-server:9238'
       - 'SEARCHER_URL=http://searcher-0:3181'
@@ -206,6 +208,7 @@ services:
       - 'OTEL_EXPORTER_OTLP_ENDPOINT=http://otel-collector:4317'
     volumes:
       - 'sourcegraph-frontend-internal-0:/mnt/cache'
+      - './site.json:/site.json'
     networks:
       - sourcegraph
     restart: always
