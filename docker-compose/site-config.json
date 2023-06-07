@@ -10,7 +10,7 @@
 	// after the initial site admin signs in, all other users must be invited.
 	//
 	// Other providers are documented at https://docs.sourcegraph.com/admin/auth.
-	// bleb - that's the local file landing here :3
+	// bleb
 	"auth.providers": [
 		{
 			"type": "builtin",
