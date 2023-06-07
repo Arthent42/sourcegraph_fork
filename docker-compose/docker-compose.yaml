@@ -77,7 +77,7 @@ services:
       - 'XDG_CONFIG_HOME=/caddy-storage/config'
       - 'SRC_FRONTEND_ADDRESSES=sourcegraph-frontend-0:3080'
       # Uncomment & update this line when using Let's Encrypt or custom HTTPS certificates:
-      - 'SRC_SITE_ADDRESS=sg.birzerc.com'
+      - 'SRC_SITE_ADDRESS=sg.birzerc.de'
       #
       # Uncomment & update the following line when using HTTPS with Let's Encrypt
       # - 'SRC_ACME_EMAIL=admin@example.com'
@@ -95,7 +95,7 @@ services:
       #
       # Uncomment the following line when using HTTPS with Let's Encrypt's production environment
       # IMPORTANT: Strongly recommended to test with the staging configuration above first, see that file for details.
-      # - '../caddy/builtins/https.lets-encrypt-prod.Caddyfile:/etc/caddy/Caddyfile'
+      - '../caddy/builtins/https.lets-encrypt-prod.Caddyfile:/etc/caddy/Caddyfile'
       #
       # Uncomment the following line when using HTTPS with custom certificates
       - '../caddy/builtins/https.custom-cert.Caddyfile:/etc/caddy/Caddyfile'
@@ -127,7 +127,6 @@ services:
     image: 'index.docker.io/sourcegraph/frontend:216430_2023-05-02_5.0-3cc9006de32c@sha256:871772686b707f1e2d18524dc5d23837922eee244c91190ad8a636d88d3563df'
     cpus: 4
     mem_limit: '8g'
-    env_file: .env_frontend
     environment:
       - DEPLOY_TYPE=docker-compose
       - 'OTEL_EXPORTER_OTLP_ENDPOINT=http://otel-collector:4317'
@@ -617,8 +616,6 @@ services:
     restart: always
     environment:
       - 'DATA_SOURCE_NAME=postgres://sg:@pgsql:5432/?sslmode=disable'
-      - 'DATA_SOURCE_NAME=postgres://source_user:@pgsql:5432/?sslmode=disable'
-      #- 'DATA_SOURCE_NAME=postgres://sg:172.19.0.2:5432/?sslmode=disable'
       - 'PG_EXPORTER_EXTEND_QUERY_PATH=/config/queries.yaml'
 
   # Description: PostgreSQL database for code intelligence data.
@@ -666,7 +663,6 @@ services:
     restart: always
     environment:
       - 'DATA_SOURCE_NAME=postgres://sg:@codeintel-db:5432/?sslmode=disable'
-      #- 'DATA_SOURCE_NAME=postgres://sg:172.19.0.2:5432/?sslmode=disable'
       - 'PG_EXPORTER_EXTEND_QUERY_PATH=/config/code_intel_queries.yaml'
 
   # Description: PostgreSQL database for code insights data.
